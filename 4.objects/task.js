@@ -14,7 +14,7 @@ Student.prototype.setSubject = function (subjectName) {
 }
 
 Student.prototype.addMarks = function (...marks) {
-    if ((this.marks.length > 1)) {
+    if ((this.marks) & (!this.hasOwnProperty('excluded'))) {
         this.marks.push(...marks);
     } else {
         this.marks = marks;
@@ -23,7 +23,7 @@ Student.prototype.addMarks = function (...marks) {
 
 Student.prototype.getAverage = function () {
     let average = 0;
-    if ((this.marks.length < 1) || (this.hasOwnProperty('excluded'))) {
+    if ((!this.marks) || (this.hasOwnProperty('excluded'))) {
         return 0;
     }
     for (let i = 0; i < this.marks.length; i++) {
