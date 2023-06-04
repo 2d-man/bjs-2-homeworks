@@ -14,22 +14,23 @@ Student.prototype.setSubject = function (subjectName) {
 }
 
 Student.prototype.addMarks = function (...marks) {
-    if ((this.marks) & (!this.hasOwnProperty('excluded'))) {
+    if (this.marks) {
         this.marks.push(...marks);
-    } else {
+    } else if (!this.hasOwnProperty('excluded')) {
         this.marks = marks;
     }
 }
 
 Student.prototype.getAverage = function () {
     let average = 0;
-    if ((!this.marks) || (this.hasOwnProperty('excluded'))) {
+    if ((!this.marks) || (this.marks.length < 1)) {
         return 0;
-    }
-    for (let i = 0; i < this.marks.length; i++) {
+    } else {
+        for (let i = 0; i < this.marks.length; i++) {
             average += this.marks[i]
         }
         return average / this.marks.length
+    }
 }
 
 Student.prototype.exclude = function (reason) {
