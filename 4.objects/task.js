@@ -5,9 +5,9 @@ function Student(name, gender, age) {
     this.marks = [];;
 }
 
-let Viktor = new Student('Viktor', 'male', 18);
-let Anatoly = new Student('Anatoly', 'male', 18);
-let Semyon = new Student('Semyon', 'male', 17);
+let studentViktor = new Student('Viktor', 'male', 18);
+let studentAnatoly = new Student('Anatoly', 'male', 18);
+let studentSemyon = new Student('Semyon', 'male', 17);
 
 Student.prototype.setSubject = function (subjectName) {
     this.subject = subjectName;
@@ -15,18 +15,22 @@ Student.prototype.setSubject = function (subjectName) {
 
 Student.prototype.addMarks = function (...marks) {
     if (this.marks) {
+        this.marks.push(...marks);
+    } else {
         this.marks = marks;
     }
 }
 
 Student.prototype.getAverage = function () {
     let average = 0;
-    if (this.marks) {
+    if (!this.marks) {
+        return 0;
+    } else {
         for (let i = 0; i < this.marks.length; i++) {
             average += this.marks[i]
         }
+        return average / this.marks.length
     }
-    return average / (this.marks.length - 1)
 }
 
 Student.prototype.exclude = function (reason) {
