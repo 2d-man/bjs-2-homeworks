@@ -1,17 +1,16 @@
 ﻿function parseCount (value) {
-    if (!Number.parseFloat(value)) {
+    let parseFloat = Number.parseFloat(value);
+    if (!parseFloat) {
         throw new Error('Невалидное значение');
     }
-    return Number.parseFloat(value);
+    return parseFloat;
 }
 
 function validateCount (value) {
     try {
-        if (parseCount(value)) {
-            return parseCount(value);
-        }
+        return parseCount(value);
     } catch (error) {
-        console.log(error);
+        return error;
     }
 }
 
@@ -26,21 +25,27 @@ class Triangle {
     }
 
     get perimeter() {
-        return a + b + c;
+        return Number(this.a + this.b + this.c);
     }
 
     get area() {
-        let p = (a + b + c) / 2;
-        return Math.sqrt(p * (p - a) * (p - b) * (p - c)).toFixed(3);
+        let p = this.perimeter / 2;
+        return Number(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(3));
     }
 }
 
 function getTriangle(a, b, c) {
     try {
         return new Triangle(a, b, c);
-    } catch {
-        this.perimeter = 'Ошибка! Треугольник не существует';
-        this.area = 'Ошибка! Треугольник не существует';
-        return new Triangle(a, b, c);
-    }
+    } catch (error) {
+        irregularTriangle = {
+            get perimeter(){
+                return 'Ошибка! Треугольник не существует';
+            },
+            get area() {
+                return 'Ошибка! Треугольник не существует';
+            }
+        };
+        return irregularTriangle;
+    };
 }
